@@ -57,7 +57,8 @@ namespace App_UI.ViewModels
             /// et faire une appel à l'OpenWeatherProcessor avec GetOneCallAsync
             /// Copier le string du resultat dans TestResult
 
-            var result = "Attendre après l'appel de GetOneCallAsync";
+            var result = await OpenWeatherProcessor.Instance.GetOneCallAsync();
+                //"Attendre après l'appel de GetOneCallAsync"
 
             TestResult = result == null ? "Not working" : result.ToString();
         }
