@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace App_UI.Services
 {
@@ -147,8 +148,10 @@ namespace App_UI.Services
         public int SetAllFromJson(string allContent)
         {
             /// TODO 01c : Compléter la méthode pour convertir les données
+
+            var data = JsonConvert.DeserializeObject<List<Person>>(allContent);
+            return data.Count;
             
-            return 0;
         }
 
         /// <summary>

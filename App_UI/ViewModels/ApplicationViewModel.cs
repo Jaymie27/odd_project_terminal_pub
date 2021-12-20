@@ -1,9 +1,11 @@
 ﻿using App_UI.Commands;
+using App_UI.Models;
 using App_UI.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace App_UI.ViewModels
 {
@@ -117,6 +119,7 @@ namespace App_UI.ViewModels
         {
             ChangePageCommand = new DelegateCommand<string>(ChangePage);
             ExportCommand = new DelegateCommand<string>(ExportData);
+            ImportCommand = new DelegateCommand<string>(ImportData);
             NewRecordCommand = new DelegateCommand<string>(RecordCreate);
 
         }
@@ -147,7 +150,18 @@ namespace App_UI.ViewModels
         {
             /// TODO 01b : Compléter la commande d'importation
             /// Utiliser PeopleDataService.Instance.SetAllFromJson(string allContent)
-            
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Filename = openFileDialog.Filename;
+                List<Person> data;
+                using (StreamReader sr = File.OpenText(filename))
+                {
+                    var fileContent = sr.ReadToEnd();
+                    var result = PeopleDataService.Instance.SetAllFromJson(fileContent);
+                }
+
+            }
+          
         }
 
         private void initViewModels()
