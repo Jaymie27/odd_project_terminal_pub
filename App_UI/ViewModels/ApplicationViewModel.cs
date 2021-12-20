@@ -130,6 +130,17 @@ namespace App_UI.ViewModels
         {
             /// TODO 02a : Compléter ExportData
             /// Utiliser PeopleDataService.Instance.GetAllAsJson() pour récupérer le json
+            var data = PeopleDataService.Instance.GetAllAsJson();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                Filename = saveFileDialog.Filename;
+                using (var tw = new StreamWriter(filename))
+                {
+                    tw.WriteLine(data);
+                    tw.Close();
+                }
+            }
+           
         }
 
         private async void ImportData(string obj)

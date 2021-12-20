@@ -158,7 +158,10 @@ namespace App_UI.Services
         public string GetAllAsJson()
         {
             /// TODO 02b : Compléter la méthode pour convertir les données
-            return string.Empty;
+            var data = GetAll();
+
+            var resultat = JsonConvert.SerializeObject(data, Formatting.Indented);
+            return resultat;
         }
 
         public IEnumerable<Person> GetAll()
